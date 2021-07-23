@@ -42,6 +42,34 @@ class Servidor(object):
         print(self.notificacao_caroneiros)
         return self.id_noti_ofereco_carona 
 
+    
+    def cancelar_carona(self,id_cancelar):
+        for dicts in self.notificacao_caronas:
+            for key,value in dicts.items():
+                if (key == 'id'):
+                    if(int(value) == int(id_cancelar)):
+                        self.notificacao_caronas.remove(dicts)
+                        print(self.notificacao_caronas)
+                        return "Viagem removida!"
+        
+        print(self.notificacao_caronas)
+        return "Id não está na Lista"
+
+
+    def cancelar_caroneiro(self,id_cancelar):
+        for dicts in self.notificacao_caroneiros:
+            for key,value in dicts.items():
+                if (key == 'id'):
+                    if(int(value) == int(id_cancelar)):
+                        self.notificacao_caroneiros.remove(dicts)
+                        print(self.notificacao_caroneiros)
+                        return "Viagem removida!"
+        
+        print(self.notificacao_caroneiros)
+        return "Id não está na Lista"
+
+
+
 
 def main():
     Pyro4.Daemon.serveSimple(

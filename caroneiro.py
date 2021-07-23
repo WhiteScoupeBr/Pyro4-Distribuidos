@@ -16,7 +16,17 @@ class Caroneiro(object):
     def acessar(self, servidor):
         self.cadastrar(servidor)
         self.inserir_carona(servidor)
-        print("Arigato!")
+        while(True):
+            option = input("1 - Cancelar Carona \n2 - Acompanhar notificação\n0 - Sair\n").strip()
+            if(option == '1'):
+                self.cancelar_carona(servidor)
+            elif(option == '2'):
+                pass
+            elif(option == '0'):
+                break
+            else:
+                print("Opção Inválida")
+            print("Arigato!")
 
 
     def cadastrar_notificacao(self, servidor,viagem):
@@ -34,6 +44,8 @@ class Caroneiro(object):
         nome = input("Insira seu nome: ").strip()
         telefone = input("Insira seu telefone: ").strip()
         if (nome and telefone):
+            self.nome = nome 
+            self.telefone = telefone
             item = {'nome':nome,'telefone':telefone}
             servidor.cadastrar_usuario(item)
             print("Usuário cadastrado com sucesso! \n")
@@ -57,6 +69,11 @@ class Caroneiro(object):
         else:
             print('ok :(\n')
     
+
+    def cancelar_carona(self, servidor):
+        id_cancelar = input("Insira o Id da viagem que deseja cancelar: \n").strip()
+        response = servidor.cancelar_caroneiro(id_cancelar)
+        print(response)
 
 
     

@@ -16,7 +16,17 @@ class Carona(object):
     def acessar(self, servidor):
         self.cadastrar(servidor)
         self.inserir_carona(servidor)
-        print("Arigato!")
+        while(True):
+            option = input("1 - Cancelar Carona \n2 - Acompanhar notificação \n0 - Sair\n").strip()
+            if(option == '1'):
+                self.cancelar_carona(servidor)
+            elif(option == '2'):
+                pass
+            elif(option == '0'):
+                break
+            else:
+                print("Opção Inválida")
+            print("Arigato!")
 
 
 
@@ -56,8 +66,19 @@ class Carona(object):
             self.cadastrar_notificacao(servidor,item)
         else:
             print('ok :(\n')
+
+    
+    def cancelar_carona(self, servidor):
+        id_cancelar = input("Insira o Id da viagem que deseja cancelar: \n").strip()
+        response = servidor.cancelar_carona(id_cancelar)
+        print(response)
     
 
 
-    
+class Callback(object):
+
+    @Pyro4.expose
+    @Pyro4.callback
+    def call(self):
+        print("callback received from server!")
 
